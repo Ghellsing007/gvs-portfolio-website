@@ -18,7 +18,7 @@ export function AboutMe() {
     { name: "Power BI", category: "data" },
     { name: "Git", category: "tools" },
     { name: "Docker", category: "tools" },
-    { name: "AWS", category: "tools" },
+    { name: "Oracle", category: "tools" },
   ]
 
   const languages = [
