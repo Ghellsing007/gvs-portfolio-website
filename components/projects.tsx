@@ -158,14 +158,14 @@ export function Projects() {
         )}
 
         <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex justify-center mb-8">
+          {/* <div className="flex justify-center mb-8">
             <TabsList>
               <TabsTrigger value="all">Todos</TabsTrigger>
               <TabsTrigger value="fullstack">Full Stack</TabsTrigger>
               <TabsTrigger value="frontend">Frontend</TabsTrigger>
               <TabsTrigger value="data">Análisis de Datos</TabsTrigger>
             </TabsList>
-          </div>
+          </div>  */}
 
           <TabsContent value={activeTab} className="mt-0">
             <motion.div

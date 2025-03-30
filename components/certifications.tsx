@@ -94,7 +94,9 @@ export function Certifications() {
   ]
 
   const filteredCertifications =
-    activeTab === "all" ? certifications : certifications.filter((cert) => cert.category === activeTab)
+    activeTab === "all" 
+      ? certifications 
+      : certifications.filter((cert) => cert.category === activeTab)
 
   const container = {
     hidden: { opacity: 0 },
@@ -128,8 +130,8 @@ export function Certifications() {
           </p>
         </motion.div>
 
-        <Tabs defaultValue="all" value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <div className="flex justify-center mb-8">
+    <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
+        {/*  <div className="flex justify-center mb-8">
             <TabsList>
               <TabsTrigger value="all">Todas</TabsTrigger>
               <TabsTrigger value="web">Desarrollo Web</TabsTrigger>
@@ -137,7 +139,7 @@ export function Certifications() {
               <TabsTrigger value="data">Análisis de Datos</TabsTrigger>
               <TabsTrigger value="other">Otros</TabsTrigger>
             </TabsList>
-          </div>
+          </div>  */}
 
           <TabsContent value={activeTab} className="mt-0">
             <motion.div
@@ -180,4 +182,7 @@ export function Certifications() {
     </section>
   )
 }
+
+
+
 
