@@ -23,7 +23,7 @@ export function AboutMe() {
 
   const languages = [
     { name: "Español", level: "Nativo" },
-    { name: "Inglés", level: "Avanzado (en proceso de mejora)" },
+    { name: "Inglés", level: "Basico (en proceso de mejora)" },
   ]
 
   const container = {
@@ -67,7 +67,7 @@ export function AboutMe() {
               <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-slate-400 to-slate-600 dark:from-slate-500 dark:to-slate-300 opacity-75 blur"></div>
               <div className="relative rounded-full overflow-hidden w-full h-full border-4 border-background">
                 <Image
-                  src="/placeholder.svg?height=320&width=320"
+                  src="/hero.webp"
                   alt="Profile"
                   width={320}
                   height={320}
@@ -84,12 +84,12 @@ export function AboutMe() {
             transition={{ duration: 0.5 }}
           >
             <h3 className="text-2xl font-bold mb-4">Desarrollador Fullstack & Analista de Datos</h3>
-            <p className="text-foreground/80 mb-6">
+            <p className="text-foreground/80 mb-6 text-justify">
               Soy un apasionado desarrollador con experiencia en la creación de aplicaciones web completas y análisis de
               datos. Mi enfoque combina habilidades técnicas con una mentalidad orientada a soluciones, permitiéndome
               construir productos digitales que resuelven problemas reales.
             </p>
-            <p className="text-foreground/80 mb-6">
+            <p className="text-foreground/80 mb-6 text-justify">
               Mi trayectoria me ha llevado a especializarme tanto en el desarrollo frontend con React y Next.js, como en
               el backend con Node.js y MongoDB. Complemento estas habilidades con análisis de datos utilizando Python,
               SQL y herramientas de visualización como Power BI.

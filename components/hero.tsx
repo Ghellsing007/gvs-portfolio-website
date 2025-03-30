@@ -20,7 +20,7 @@ export function Hero() {
             Transformo ideas en aplicaciones reales.
           </h1>
           <p className="text-xl md:text-2xl mb-8 text-foreground/80">
-            Desarrollador Fullstack y Analista de Datos especializado en crear soluciones digitales impactantes.
+            Desarrollador Fullstack y Analista de Datos especializado en crear soluciones digitales.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             <Button

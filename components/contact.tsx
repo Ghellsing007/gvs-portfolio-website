@@ -1,95 +1,94 @@
-"use client"
+"use client";
 
-import type React from "react"
-
-import { useState } from "react"
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Card, CardContent } from "@/components/ui/card"
-import { useToast } from "@/hooks/use-toast"
-import { Github, Linkedin, Mail, Send, MessageSquare } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Card, CardContent } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
+import { Github, Linkedin, Mail, Send, MessageSquare } from "lucide-react";
+import emailjs from "@emailjs/browser"; // Importar EmailJS
 
 export function Contact() {
-  const { toast } = useToast()
-  const [isSubmitting, setIsSubmitting] = useState(false)
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
-  })
+  });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData((prev) => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
-
-    // Simulate form submission
-    setTimeout(() => {
+    e.preventDefault();
+    setIsSubmitting(true);
+  
+    // 🔐 Validar variables de entorno
+    const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID;
+    const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID;
+    const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY;
+  
+    if (!serviceId || !templateId || !publicKey) {
+      console.error("❌ Faltan variables de entorno para EmailJS");
+      toast({
+        title: "Error interno",
+        description: "Faltan configuraciones necesarias para enviar el mensaje.",
+        variant: "destructive",
+      });
+      setIsSubmitting(false);
+      return;
+    }
+  
+    try {
+      await emailjs.send(serviceId, templateId, formData, publicKey);
       toast({
         title: "Mensaje enviado",
         description: "Gracias por contactarme. Te responderé pronto.",
-      })
-      setFormData({ name: "", email: "", message: "" })
-      setIsSubmitting(false)
-    }, 1500)
-
-    // In a real implementation, you would use EmailJS or a backend service
-    // Example with EmailJS:
-    // try {
-    //   await emailjs.send(
-    //     "YOUR_SERVICE_ID",
-    //     "YOUR_TEMPLATE_ID",
-    //     formData,
-    //     "YOUR_PUBLIC_KEY"
-    //   );
-    //   toast({
-    //     title: "Mensaje enviado",
-    //     description: "Gracias por contactarme. Te responderé pronto.",
-    //   });
-    //   setFormData({ name: "", email: "", message: "" });
-    // } catch (error) {
-    //   toast({
-    //     title: "Error",
-    //     description: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
-    //     variant: "destructive",
-    //   });
-    // } finally {
-    //   setIsSubmitting(false);
-    // }
-  }
-
+      });
+      setFormData({ name: "", email: "", message: "" });
+    } catch (error) {
+      console.error("❌ Error al enviar el mensaje:", error);
+      toast({
+        title: "Error",
+        description: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
   const socialLinks = [
     {
       name: "GitHub",
       icon: Github,
-      url: "https://github.com/yourusername",
+      url: "https://github.com/Ghellsing007",
       color: "hover:text-gray-800 dark:hover:text-gray-200",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://linkedin.com/in/yourusername",
+      url: "https://www.linkedin.com/in/garving-vasquez-severino-118a98343",
       color: "hover:text-blue-700",
     },
     {
       name: "Email",
       icon: Mail,
-      url: "mailto:your.email@example.com",
+      url: "mailto:garving.vasquez@gmail.com",
       color: "hover:text-red-500",
     },
     {
       name: "WhatsApp",
       icon: MessageSquare,
-      url: "https://wa.me/yourphonenumber",
+      url: "https://wa.me/+18298725551",
       color: "hover:text-green-600",
     },
-  ]
+  ];
 
   return (
     <section id="contact" className="py-20 bg-background">
@@ -186,14 +185,14 @@ export function Contact() {
                 <div className="space-y-4 mb-8">
                   <p className="flex items-center">
                     <Mail className="h-5 w-5 mr-3 text-primary" />
-                    <a href="mailto:your.email@example.com" className="hover:text-primary transition-colors">
-                      your.email@example.com
+                    <a href="mailto:garving.vasquez@gmail.com" className="hover:text-primary transition-colors">
+                      garving.vasquez@gmail.com
                     </a>
                   </p>
                   <p className="flex items-center">
                     <MessageSquare className="h-5 w-5 mr-3 text-primary" />
-                    <a href="https://wa.me/yourphonenumber" className="hover:text-primary transition-colors">
-                      +XX XXX XXX XXXX
+                    <a href="https://wa.me/+18298725551" className="hover:text-primary transition-colors">
+                      +1 829 872 5551
                     </a>
                   </p>
                 </div>
@@ -221,7 +220,7 @@ export function Contact() {
                 <h4 className="font-semibold mb-2">Disponibilidad</h4>
                 <p className="text-foreground/80 text-sm">
                   Actualmente estoy disponible para proyectos freelance y oportunidades de trabajo a tiempo completo. Mi
-                  horario de respuesta es de lunes a viernes, de 9:00 a 18:00 (GMT-5).
+                  horario de respuesta es de todos los días, de 8:00 a 19:00 (GMT-5).
                 </p>
               </div>
             </div>
@@ -229,6 +228,5 @@ export function Contact() {
         </div>
       </div>
     </section>
-  )
+  );
 }
-

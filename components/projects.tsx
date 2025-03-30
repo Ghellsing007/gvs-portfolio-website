@@ -18,7 +18,7 @@ export function Projects() {
       title: "GVSanime",
       description:
         "Plataforma de streaming de anime con funcionalidades de búsqueda avanzada, listas personalizadas y recomendaciones basadas en preferencias del usuario.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/coming soon.png",
       tags: ["React", "Node.js", "MongoDB", "Express"],
       category: "fullstack",
       github: "#",
@@ -32,7 +32,7 @@ export function Projects() {
       title: "Dashboard Analítico",
       description:
         "Dashboard interactivo para visualización de datos de ventas y métricas de rendimiento con filtros dinámicos y reportes automatizados.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/coming soon.png",
       tags: ["Python", "Power BI", "SQL", "Pandas"],
       category: "data",
       github: "#",
@@ -44,7 +44,7 @@ export function Projects() {
       title: "Sistema de Gestión",
       description:
         "CRUD completo para gestión de inventario y ventas con autenticación de usuarios y diferentes niveles de acceso.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/coming soon.png",
       tags: ["React", "Node.js", "MongoDB", "JWT"],
       category: "fullstack",
       github: "#",
@@ -56,7 +56,7 @@ export function Projects() {
       title: "App de Clima",
       description:
         "Aplicación que muestra el pronóstico del tiempo en tiempo real con visualizaciones interactivas y alertas personalizadas.",
-      image: "/placeholder.svg?height=400&width=600",
+      image: "/coming soon.png",
       tags: ["React", "API", "Tailwind CSS"],
       category: "frontend",
       github: "#",

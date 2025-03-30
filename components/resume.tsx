@@ -10,47 +10,56 @@ export function Resume() {
   const experience = [
     {
       id: 1,
-      role: "Desarrollador Full Stack",
-      company: "Tech Solutions",
-      period: "2022 - Presente",
-      description:
-        "Desarrollo de aplicaciones web utilizando React, Node.js y MongoDB. Implementación de APIs RESTful y optimización de rendimiento.",
-      skills: ["React", "Node.js", "MongoDB", "Express", "Git"],
+  role: "Programador Jr",
+  company: "SHS Consultores – Mayblue Caribe",
+  period: "202X – Presente",
+  description:
+    "Desarrollo de funcionalidades con LN4 y Oracle SQL, automatización de procesos, soporte técnico y colaboración con el equipo de análisis de datos.",
+  skills: ["LN4", "Oracle SQL", "Automatización", "Bases de Datos", "Análisis de Datos"],
     },
     {
       id: 2,
-      role: "Analista de Datos",
-      company: "Data Insights",
-      period: "2020 - 2022",
+      role: "Agente VTP | Supervisor Asistente del Director",
+      company: "Dirección General de Servicios Penitenciarios y Correccionales (PGR)",
+      period: "202X – Presente",
       description:
-        "Análisis de datos de ventas y marketing. Creación de dashboards interactivos y reportes automatizados para la toma de decisiones.",
-      skills: ["Python", "SQL", "Power BI", "Excel", "Pandas"],
+        "Apoyo técnico en la Unidad contra Ilícitos Tecnológicos y diseño de protocolos para mejorar la gestión institucional.",
+      skills: ["Protocolos de Seguridad", "Soporte Técnico", "Gestión Interna"],
     },
     {
       id: 3,
-      role: "Desarrollador Frontend",
-      company: "Web Creations",
-      period: "2019 - 2020",
+      role: "Soporte Técnico",
+      company: "Hogamundi For Sale",
+      period: "2018",
       description:
-        "Diseño y desarrollo de interfaces de usuario responsivas y accesibles. Implementación de mejoras de UX/UI.",
-      skills: ["HTML", "CSS", "JavaScript", "React", "Figma"],
+        "Optimización de base de datos MySQL, implementación de respaldos automáticos y mejora de disponibilidad del sistema.",
+      skills: ["MySQL", "Optimización de Base de Datos", "Automatización", "Respaldo de Sistemas"],
+    },
+    {
+      id: 4,
+      role: "Soporte Informático",
+      company: "D’FRANK PC",
+      period: "2017",
+      description:
+        "Desarrollo de página interna con HTML, CSS y JS, mejora de reportes y seguridad de bases de datos.",
+      skills: ["HTML", "CSS", "JavaScript", "Desarrollo Web", "Seguridad de Datos"],
     },
   ]
 
   const education = [
     {
       id: 1,
-      degree: "Ingeniería en Sistemas Computacionales",
-      institution: "Universidad Tecnológica",
-      period: "2015 - 2019",
+      degree: "Ingeniería en Desarrollo de Software",
+      institution: "Universidad Abierta Para Adultos (UAPA)",
+      period: "20xx  – presente",
       description: "Especialización en desarrollo de software y análisis de datos.",
     },
     {
       id: 2,
-      degree: "Bootcamp de Desarrollo Web Full Stack",
-      institution: "Coding Academy",
-      period: "2019",
-      description: "Programa intensivo de 12 semanas enfocado en tecnologías web modernas.",
+      degree: "Desarrollo Web Full Stack Moderno",
+      institution: "Full Stack Open Universidad de Helsinki",
+      period: "20xx  – presente",
+      description: "Programa intensivo  enfocado en tecnologías web modernas.",
     },
   ]
 
@@ -82,8 +91,8 @@ export function Resume() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4">Currículum</h2>
           <div className="h-1 w-20 bg-primary mx-auto"></div>
           <div className="mt-6">
-            <Button asChild size="lg">
-              <a href="#" download>
+                <Button asChild size="lg">
+              <a href="/CV_Garving_Vasquez_Severino.pdf" download>
                 <Download className="mr-2 h-4 w-4" />
                 Descargar CV
               </a>
