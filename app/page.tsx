@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main>
+      <main className="container mx-auto px-4">
         <Hero />
         <AboutMe />
         <Projects />
@@ -23,4 +23,5 @@ export default function Home() {
     </div>
   )
 }
+
 

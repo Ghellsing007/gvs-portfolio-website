@@ -19,9 +19,17 @@ export function Header() {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10)
     }
+
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
+
+  useEffect(() => {
+    document.body.style.overflow = mobileMenuOpen ? "hidden" : "auto"
+    return () => {
+      document.body.style.overflow = "auto"
+    }
+  }, [mobileMenuOpen])
 
   const navLinks = [
     { name: "Home", href: "#home" },
@@ -38,12 +46,11 @@ export function Header() {
         isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between">
+      <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-full">
         <Link href="/" className="text-xl font-bold text-primary">
           Garving Vasquez S.
         </Link>
 
-        {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center space-x-6">
           {navLinks.map((link) => (
             <Link key={link.name} href={link.href} className="text-foreground/80 hover:text-primary transition-colors">
@@ -62,14 +69,12 @@ export function Header() {
           )}
         </nav>
 
-        {/* Mobile Menu Button */}
-        <div className="flex items-center md:hidden">
+        <div className="flex items-center md:hidden space-x-2">
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="mr-2"
               aria-label="Toggle theme"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -81,21 +86,33 @@ export function Header() {
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
           >
-            {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.div
+                key={mobileMenuOpen ? "close" : "menu"}
+                initial={{ opacity: 0, rotate: -90, scale: 0.8 }}
+                animate={{ opacity: 1, rotate: 0, scale: 1 }}
+                exit={{ opacity: 0, rotate: 90, scale: 0.8 }}
+                transition={{ duration: 0.25 }}
+              >
+                {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+              </motion.div>
+            </AnimatePresence>
           </Button>
         </div>
       </div>
 
-      {/* Mobile Menu Fullscreen */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-40 md:hidden bg-background/95 backdrop-blur-md flex flex-col items-center justify-center"
+            transition={{ duration: 0.2 }}
+            className="fixed top-[68px] left-0 w-full h-[calc(100vh-68px)] z-40 md:hidden bg-background/95 backdrop-blur-md flex items-center justify-center"
+            role="dialog"
+            aria-modal="true"
           >
-            <div className="space-y-6 text-center">
+            <div className="flex flex-col items-center gap-6 text-center px-6 w-full">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
