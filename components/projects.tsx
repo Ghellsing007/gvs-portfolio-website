@@ -56,11 +56,11 @@ export function Projects() {
       title: "App de Clima",
       description:
         "Aplicación que muestra el pronóstico del tiempo en tiempo real con visualizaciones interactivas y alertas personalizadas.",
-      image: "/coming soon.png",
-      tags: ["React", "API", "Tailwind CSS"],
+      image: "/ClimApp.png",
+      tags: ["React", "API", "Tailwind CSS, Next.js, TypeScript"],
       category: "frontend",
-      github: "#",
-      demo: "#",
+      github: "https://github.com/Ghellsing007/GVS-weather-app",
+      demo: "https://gvsclima.netlify.app/",
       featured: false,
     },
   ]
