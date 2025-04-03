@@ -63,6 +63,18 @@ export function Projects() {
       demo: "https://gvsclima.netlify.app/",
       featured: false,
     },
+    {
+      id: 5,
+      title: "Integracion de IA",
+      description:
+        "Integracion de modelos de inteligencia artifial a proyectos de desarrollos.",
+      image: "/IA-UAPA.png",
+      tags: ["IA", "API", "Tailwind CSS, Vite.js, TypeScript"],
+      category: "frontend , Backend", 
+      github: "https://github.com/Ghellsing007/IA-trabajo-final-UAPA",
+      demo: "https://iatrabajofinaluapa.netlify.app/",
+      featured: false,
+    },
   ]
 
   const filteredProjects = activeTab === "all" ? projects : projects.filter((project) => project.category === activeTab)
