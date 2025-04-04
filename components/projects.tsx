@@ -15,11 +15,11 @@ export function Projects() {
   const projects = [
     {
       id: 1,
-      title: "GVSanime",
+      title: "GVS Generador de QR",
       description:
-        "Plataforma de streaming de anime con funcionalidades de búsqueda avanzada, listas personalizadas y recomendaciones basadas en preferencias del usuario.",
-      image: "/coming soon.png",
-      tags: ["React", "Node.js", "MongoDB", "Express"],
+        "Este es un generados de QR para Url's.",
+      image: "/gvs-QR.png",
+      tags: ["React", "Next.js", "Tailwind CSS", "API"],
       category: "fullstack",
       github: "#",
       demo: "#",
