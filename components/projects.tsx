@@ -25,7 +25,7 @@ export function Projects() {
       demo: "https://generationqr.netlify.app/",
       featured: true,
       process:
-        "¡Transforma tus enlaces en algo simple y práctico! URLCode Generator es una aplicación ligera y fácil de usar que convierte cualquier URL en un código único o un QR instantáneo. Ingresa tu enlace, obtén tu código y compártelo al instante. Perfecto para simplificar accesos, ahorrar espacio o dar un toque moderno a tus proyectos. ¡Rápido, seguro y sin complicaciones!",
+        "¡Transforma tus enlaces en algo simple y práctico! GVS Generador de QR es una aplicación ligera y fácil de usar que convierte cualquier URL en un código único o un QR instantáneo. Ingresa tu enlace, obtén tu código y compártelo al instante. Perfecto para simplificar accesos, ahorrar espacio o dar un toque moderno a tus proyectos. ¡Rápido, seguro y sin complicaciones!",
     },
     {
       id: 2,
