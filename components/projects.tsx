@@ -22,10 +22,10 @@ export function Projects() {
       tags: ["React", "Next.js", "Tailwind CSS", "API"],
       category: "fullstack",
       github: "#",
-      demo: "#",
+      demo: "https://generationqr.netlify.app/",
       featured: true,
       process:
-        "Este proyecto nació de mi pasión por el anime y la necesidad de una plataforma que ofreciera una experiencia personalizada. Implementé un sistema de recomendaciones basado en el historial de visualización y desarrollé una interfaz intuitiva para mejorar la experiencia de usuario.",
+        "¡Transforma tus enlaces en algo simple y práctico! URLCode Generator es una aplicación ligera y fácil de usar que convierte cualquier URL en un código único o un QR instantáneo. Ingresa tu enlace, obtén tu código y compártelo al instante. Perfecto para simplificar accesos, ahorrar espacio o dar un toque moderno a tus proyectos. ¡Rápido, seguro y sin complicaciones!",
     },
     {
       id: 2,
