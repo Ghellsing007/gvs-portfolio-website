@@ -15,6 +15,7 @@ export function AboutMe() {
     { name: "MongoDB", category: "backend" },
     { name: "Python", category: "data" },
     { name: "SQL", category: "data" },
+    { name: "Excel", category: "data" },
     { name: "Power BI", category: "data" },
     { name: "Git", category: "tools" },
     { name: "Docker", category: "tools" },
@@ -67,7 +68,7 @@ export function AboutMe() {
               <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-slate-400 to-slate-600 dark:from-slate-500 dark:to-slate-300 opacity-75 blur"></div>
               <div className="relative rounded-full overflow-hidden w-full h-full border-4 border-background">
                 <Image
-                  src="/hero.webp"
+                  src="/heroOne.webp"
                   alt="Profile"
                   width={320}
                   height={320}
