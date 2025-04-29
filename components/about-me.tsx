@@ -68,7 +68,7 @@ export function AboutMe() {
               <div className="absolute -inset-2 rounded-full bg-gradient-to-r from-slate-400 to-slate-600 dark:from-slate-500 dark:to-slate-300 opacity-75 blur"></div>
               <div className="relative rounded-full overflow-hidden w-full h-full border-4 border-background">
                 <Image
-                  src="/heroOne.webp"
+                  src="/hero.jpg"
                   alt="Profile"
                   width={320}
                   height={320}
