@@ -15,28 +15,28 @@ export function Projects() {
   const projects = [
     {
       id: 1,
-      title: "GVS Generador de QR",
+      title: "GVService",
       description:
-        "Este es un generados de QR para Url's.",
-      image: "/gvs-QR.png",
+        "Impulsamos tu negocio con soluciones tecnológicas innovadoras, Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
+      image: "/gvservices.png",
       tags: ["React", "Next.js", "Tailwind CSS", "API"],
       category: "fullstack",
       github: "#",
-      demo: "https://generationqr.netlify.app/",
+      demo: "https://gvservices.netlify.app",
       featured: true,
       process:
         "¡Transforma tus enlaces en algo simple y práctico! GVS Generador de QR es una aplicación ligera y fácil de usar que convierte cualquier URL en un código único o un QR instantáneo. Ingresa tu enlace, obtén tu código y compártelo al instante. Perfecto para simplificar accesos, ahorrar espacio o dar un toque moderno a tus proyectos. ¡Rápido, seguro y sin complicaciones!",
     },
     {
       id: 2,
-      title: "Dashboard Analítico",
+      title: "Agendly-SaaS",
       description:
-        "Dashboard interactivo para visualización de datos de ventas y métricas de rendimiento con filtros dinámicos y reportes automatizados.",
-      image: "/coming soon.png",
-      tags: ["Python", "Power BI", "SQL", "Pandas"],
-      category: "data",
-      github: "#",
-      demo: "#",
+        "Agendly es una plataforma SaaS que te permite gestionar tus citas y horarios de manera eficiente. Con un diseño intuitivo y fácil de usar, puedes agendar, cancelar y reagendar citas en minutos.",
+      image: "/agendly-saas.webp",
+      tags: ["React", "Next.js", "Tailwind CSS", "API"],
+      category: "fullstack",
+      /* github: "#", */
+      demo: "https://agendly-saas.netlify.app",
       featured: false,
     },
     {
@@ -70,11 +70,36 @@ export function Projects() {
         "Integracion de modelos de inteligencia artifial a proyectos de desarrollos.",
       image: "/IA-UAPA.png",
       tags: ["IA", "API", "Tailwind CSS, Vite.js, TypeScript"],
-      category: "frontend , Backend", 
+      category: "frontend , Backend",
       github: "https://github.com/Ghellsing007/IA-trabajo-final-UAPA",
       demo: "https://iatrabajofinaluapa.netlify.app/",
       featured: false,
     },
+    {
+      id: 6,
+      title: "GVS Generador de QR",
+      description:
+        "Este es un generados de QR para Url's.",
+      image: "/gvs-QR.png",
+      tags: ["React", "Next.js", "Tailwind CSS", "API"],
+      category: "fullstack",
+      github: "#",
+      demo: "https://generationqr.netlify.app/",
+      featured: false,
+    },
+    {
+      id: 7,
+      title: "Dashboard Analítico",
+      description:
+        "Dashboard interactivo para visualización de datos de ventas y métricas de rendimiento con filtros dinámicos y reportes automatizados.",
+      image: "/coming soon.png",
+      tags: ["Python", "Power BI", "SQL", "Pandas"],
+      category: "data",
+      github: "#",
+      demo: "#",
+      featured: false,
+    },
+
   ]
 
   const filteredProjects = activeTab === "all" ? projects : projects.filter((project) => project.category === activeTab)
@@ -145,24 +170,24 @@ export function Projects() {
                 </div>
                 <p className="text-foreground/70 mb-6 text-sm">{featuredProject.process}</p>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild size="sm" variant="outline">
+                  {/* <Button asChild size="sm" variant="outline">
                     <a href={featuredProject.github} target="_blank" rel="noopener noreferrer">
                       <Github className="mr-2 h-4 w-4" />
                       Código
                     </a>
-                  </Button>
+                  </Button>  */}
                   <Button asChild size="sm">
                     <a href={featuredProject.demo} target="_blank" rel="noopener noreferrer">
                       <ExternalLink className="mr-2 h-4 w-4" />
-                      Demo
+                      Visitar sitio
                     </a>
                   </Button>
-                  <Button asChild size="sm" variant="secondary">
+                  {/*   <Button asChild size="sm" variant="secondary">
                     <a href="#" target="_blank" rel="noopener noreferrer">
                       <Play className="mr-2 h-4 w-4" />
                       Ver Video
                     </a>
-                  </Button>
+                  </Button> */}
                 </div>
               </div>
             </div>
@@ -211,18 +236,22 @@ export function Projects() {
                           ))}
                         </div>
                         <div className="flex gap-3 mt-auto pt-2">
-                          <Button asChild size="sm" variant="outline">
-                            <a href={project.github} target="_blank" rel="noopener noreferrer">
-                              <Github className="mr-1 h-3 w-3" />
-                              Código
-                            </a>
-                          </Button>
-                          <Button asChild size="sm">
-                            <a href={project.demo} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="mr-1 h-3 w-3" />
-                              Demo
-                            </a>
-                          </Button>
+                          {project.github && (
+                            <Button asChild size="sm" variant="outline">
+                              <a href={project.github} target="_blank" rel="noopener noreferrer">
+                                <Github className="mr-1 h-3 w-3" />
+                                Código
+                              </a>
+                            </Button>
+                          )}
+                          {project.demo && (
+                            <Button asChild size="sm">
+                              <a href={project.demo} target="_blank" rel="noopener noreferrer">
+                                <ExternalLink className="mr-1 h-3 w-3" />
+                                Demo
+                              </a>
+                            </Button>
+                          )}
                         </div>
                       </CardContent>
                     </Card>
