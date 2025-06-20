@@ -22,7 +22,7 @@ export function Projects() {
       tags: ["React", "Next.js", "Tailwind CSS", "Power BI", "API"],
       category: "data",
       github: "#",
-      demo: "https://rendrly-demo.netlify.app",
+      demo: "https://rendrly.netlify.app",
       featured: true,
       process:
         "Rendrly permite a los usuarios cargar, analizar y visualizar datos de ventas en tiempo real, facilitando la toma de decisiones estratégicas mediante paneles personalizables y reportes automatizados.",
