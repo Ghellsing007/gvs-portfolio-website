@@ -15,6 +15,20 @@ export function Projects() {
   const projects = [
     {
       id: 1,
+      title: "Rendrly",
+      description:
+        "Rendrly es una plataforma para la gestión y visualización de reportes de ventas y métricas de negocio, con dashboards interactivos y exportación de datos.",
+      image: "/rendrly.png",
+      tags: ["React", "Next.js", "Tailwind CSS", "Power BI", "API"],
+      category: "data",
+      github: "#",
+      demo: "https://rendrly-demo.netlify.app",
+      featured: true,
+      process:
+        "Rendrly permite a los usuarios cargar, analizar y visualizar datos de ventas en tiempo real, facilitando la toma de decisiones estratégicas mediante paneles personalizables y reportes automatizados.",
+    },
+    {
+      id: 2,
       title: "GVService",
       description:
         "Impulsamos tu negocio con soluciones tecnológicas innovadoras, Desarrollo de software, optimización de procesos y soluciones digitales hechas para ti",
@@ -23,12 +37,12 @@ export function Projects() {
       category: "fullstack",
       github: "#",
       demo: "https://gvservices.netlify.app",
-      featured: true,
+      featured: false,
       process:
         "¡Transforma tus enlaces en algo simple y práctico! GVS Generador de QR es una aplicación ligera y fácil de usar que convierte cualquier URL en un código único o un QR instantáneo. Ingresa tu enlace, obtén tu código y compártelo al instante. Perfecto para simplificar accesos, ahorrar espacio o dar un toque moderno a tus proyectos. ¡Rápido, seguro y sin complicaciones!",
     },
     {
-      id: 2,
+      id: 3,
       title: "Agendly-SaaS",
       description:
         "Agendly es una plataforma SaaS que te permite gestionar tus citas y horarios de manera eficiente. Con un diseño intuitivo y fácil de usar, puedes agendar, cancelar y reagendar citas en minutos.",
@@ -40,7 +54,7 @@ export function Projects() {
       featured: false,
     },
     {
-      id: 3,
+      id: 4,
       title: "Sistema de Gestión",
       description:
         "CRUD completo para gestión de inventario y ventas con autenticación de usuarios y diferentes niveles de acceso.",
@@ -52,7 +66,7 @@ export function Projects() {
       featured: false,
     },
     {
-      id: 4,
+      id: 5,
       title: "App de Clima",
       description:
         "Aplicación que muestra el pronóstico del tiempo en tiempo real con visualizaciones interactivas y alertas personalizadas.",
@@ -64,7 +78,7 @@ export function Projects() {
       featured: false,
     },
     {
-      id: 5,
+      id: 6,
       title: "Integracion de IA",
       description:
         "Integracion de modelos de inteligencia artifial a proyectos de desarrollos.",
@@ -76,7 +90,7 @@ export function Projects() {
       featured: false,
     },
     {
-      id: 6,
+      id: 7,
       title: "GVS Generador de QR",
       description:
         "Este es un generados de QR para Url's.",
@@ -87,20 +101,8 @@ export function Projects() {
       demo: "https://generationqr.netlify.app/",
       featured: false,
     },
-    {
-      id: 7,
-      title: "Dashboard Analítico",
-      description:
-        "Dashboard interactivo para visualización de datos de ventas y métricas de rendimiento con filtros dinámicos y reportes automatizados.",
-      image: "/coming soon.png",
-      tags: ["Python", "Power BI", "SQL", "Pandas"],
-      category: "data",
-      github: "#",
-      demo: "#",
-      featured: false,
-    },
-
-  ]
+    
+     ]
 
   const filteredProjects = activeTab === "all" ? projects : projects.filter((project) => project.category === activeTab)
 
