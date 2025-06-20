@@ -19,7 +19,7 @@ export function Projects() {
       description:
         "Rendrly es una plataforma para la gestión y visualización de reportes de ventas y métricas de negocio, con dashboards interactivos y exportación de datos.",
       image: "/rendrly.png",
-      tags: ["React", "Next.js", "Tailwind CSS", "Power BI", "API"],
+      tags: ["React", "Next.js", "Tailwind CSS", "API"],
       category: "data",
       github: "#",
       demo: "https://rendrly.netlify.app",
