@@ -55,11 +55,11 @@ export function Projects() {
     },
     {
       id: 4,
-      title: "Sistema de Gestión",
+      title: "GVSanime",
       description:
-        "CRUD completo para gestión de inventario y ventas con autenticación de usuarios y diferentes niveles de acceso.",
-      image: "/coming soon.png",
-      tags: ["React", "Node.js", "MongoDB", "JWT"],
+        "Web de anime con API diseño moderno",
+      image: "/GVSanime.png",
+      tags: ["Next, React", "Node.js", "MongoDB", "JWT"],
       category: "fullstack",
       github: "#",
       demo: "#",

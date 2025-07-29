@@ -92,7 +92,7 @@ export function Resume() {
           <div className="h-1 w-20 bg-primary mx-auto"></div>
           <div className="mt-6">
                 <Button asChild size="lg">
-              <a href="/CV_Garving_Vasquez_Severino.pdf" download>
+              <a href="/CV Garving Vasquez Severino.pdf" download>
                 <Download className="mr-2 h-4 w-4" />
                 Descargar CV
               </a>
