@@ -46,8 +46,8 @@ export function Header() {
         isScrolled ? "bg-background/80 backdrop-blur-md shadow-sm" : "bg-transparent"
       }`}
     >
-      <div className="container mx-auto px-4 py-4 flex items-center justify-between max-w-full">
-        <Link href="/" className="text-xl font-bold text-primary">
+      <div className="container mx-auto px-4 py-3 sm:py-4 flex items-center justify-between max-w-full">
+        <Link href="/" className="text-lg sm:text-xl font-bold text-primary">
           Garving Vasquez S.
         </Link>
 
@@ -76,6 +76,7 @@ export function Header() {
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
               aria-label="Toggle theme"
+              className="min-h-[44px] min-w-[44px]"
             >
               {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
@@ -85,6 +86,7 @@ export function Header() {
             size="icon"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
+            className="min-h-[44px] min-w-[44px]"
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
@@ -108,16 +110,16 @@ export function Header() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="fixed top-[68px] left-0 w-full h-[calc(100vh-68px)] z-40 md:hidden bg-background/95 backdrop-blur-md flex items-center justify-center"
+            className="fixed top-[64px] sm:top-[68px] left-0 w-full h-[calc(100vh-64px)] sm:h-[calc(100vh-68px)] z-40 md:hidden bg-background/95 backdrop-blur-md flex items-center justify-center"
             role="dialog"
             aria-modal="true"
           >
-            <div className="flex flex-col items-center gap-6 text-center px-6 w-full">
+            <div className="flex flex-col items-center gap-6 sm:gap-8 text-center px-6 w-full max-w-sm">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className="text-lg text-foreground/90 hover:text-primary transition-colors"
+                  className="text-lg sm:text-xl text-foreground/90 hover:text-primary transition-colors py-3 px-4 rounded-lg hover:bg-primary/10 w-full text-center min-h-[48px] flex items-center justify-center"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}

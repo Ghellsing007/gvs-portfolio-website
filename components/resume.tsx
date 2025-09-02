@@ -79,20 +79,20 @@ export function Resume() {
   }
 
   return (
-    <section id="resume" className="py-20 bg-background/50">
+    <section id="resume" className="py-12 sm:py-16 lg:py-20 bg-background/50">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12 sm:mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Currículum</h2>
-          <div className="h-1 w-20 bg-primary mx-auto"></div>
-          <div className="mt-6">
-                <Button asChild size="lg">
-              <a href="/CV Garving Vasquez Severino.pdf" download>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold mb-4">Currículum</h2>
+          <div className="h-1 w-16 sm:w-20 bg-primary mx-auto"></div>
+          <div className="mt-4 sm:mt-6">
+                <Button asChild size="lg" className="min-h-[44px]">
+              <a href="/Garving Vasquez Severino.pdf" download>
                 <Download className="mr-2 h-4 w-4" />
                 Descargar CV
               </a>
@@ -100,11 +100,11 @@ export function Resume() {
           </div>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
           <div>
-            <div className="flex items-center mb-8">
-              <Briefcase className="h-6 w-6 mr-3 text-primary" />
-              <h3 className="text-2xl font-bold">Experiencia</h3>
+            <div className="flex items-center mb-6 sm:mb-8">
+              <Briefcase className="h-5 w-5 sm:h-6 sm:w-6 mr-3 text-primary flex-shrink-0" />
+              <h3 className="text-xl sm:text-2xl font-bold">Experiencia</h3>
             </div>
             <motion.div
               variants={container}
@@ -116,16 +116,16 @@ export function Resume() {
               {experience.map((job) => (
                 <motion.div key={job.id} variants={item}>
                   <Card className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-lg font-semibold">{job.role}</h4>
-                        <Badge variant="outline">{job.period}</Badge>
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex flex-col xs:flex-row xs:justify-between xs:items-start mb-3 gap-2">
+                        <h4 className="text-base sm:text-lg font-semibold leading-tight">{job.role}</h4>
+                        <Badge variant="outline" className="text-xs self-start xs:self-auto">{job.period}</Badge>
                       </div>
-                      <p className="text-primary font-medium mb-3">{job.company}</p>
-                      <p className="text-foreground/80 text-sm mb-4">{job.description}</p>
+                      <p className="text-primary font-medium mb-3 text-sm sm:text-base">{job.company}</p>
+                      <p className="text-foreground/80 text-sm mb-4 leading-relaxed">{job.description}</p>
                       <div className="flex flex-wrap gap-2">
                         {job.skills.map((skill) => (
-                          <Badge key={skill} variant="secondary" className="text-xs">
+                          <Badge key={skill} variant="secondary" className="text-xs py-1 px-2">
                             {skill}
                           </Badge>
                         ))}
@@ -138,9 +138,9 @@ export function Resume() {
           </div>
 
           <div>
-            <div className="flex items-center mb-8">
-              <GraduationCap className="h-6 w-6 mr-3 text-primary" />
-              <h3 className="text-2xl font-bold">Educación</h3>
+            <div className="flex items-center mb-6 sm:mb-8">
+              <GraduationCap className="h-5 w-5 sm:h-6 sm:w-6 mr-3 text-primary flex-shrink-0" />
+              <h3 className="text-xl sm:text-2xl font-bold">Educación</h3>
             </div>
             <motion.div
               variants={container}
@@ -152,43 +152,67 @@ export function Resume() {
               {education.map((edu) => (
                 <motion.div key={edu.id} variants={item}>
                   <Card className="hover:shadow-md transition-shadow">
-                    <CardContent className="p-6">
-                      <div className="flex justify-between items-start mb-2">
-                        <h4 className="text-lg font-semibold">{edu.degree}</h4>
-                        <Badge variant="outline">{edu.period}</Badge>
+                    <CardContent className="p-4 sm:p-6">
+                      <div className="flex flex-col xs:flex-row xs:justify-between xs:items-start mb-3 gap-2">
+                        <h4 className="text-base sm:text-lg font-semibold leading-tight">{edu.degree}</h4>
+                        <Badge variant="outline" className="text-xs self-start xs:self-auto">{edu.period}</Badge>
                       </div>
-                      <p className="text-primary font-medium mb-3">{edu.institution}</p>
-                      <p className="text-foreground/80 text-sm">{edu.description}</p>
+                      <p className="text-primary font-medium mb-3 text-sm sm:text-base">{edu.institution}</p>
+                      <p className="text-foreground/80 text-sm leading-relaxed">{edu.description}</p>
                     </CardContent>
                   </Card>
                 </motion.div>
               ))}
             </motion.div>
 
-            <div className="mt-12">
-              <div className="flex items-center mb-8">
-                <h3 className="text-2xl font-bold">Habilidades Clave</h3>
+            <div className="mt-8 sm:mt-12">
+              <div className="flex items-center mb-6 sm:mb-8">
+                <h3 className="text-xl sm:text-2xl font-bold">Habilidades Clave</h3>
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                 <Card>
-                  <CardContent className="p-4">
-                    <h4 className="font-semibold mb-2">Desarrollo</h4>
-                    <ul className="space-y-1 text-sm">
-                      <li>• Desarrollo Full Stack</li>
-                      <li>• Arquitectura de Software</li>
-                      <li>• Optimización de Rendimiento</li>
-                      <li>• Testing y Debugging</li>
+                  <CardContent className="p-4 sm:p-6">
+                    <h4 className="font-semibold mb-3 text-base sm:text-lg">Desarrollo</h4>
+                    <ul className="space-y-2 text-sm sm:text-base">
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Desarrollo Full Stack</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Arquitectura de Software</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Optimización de Rendimiento</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Testing y Debugging</span>
+                      </li>
                     </ul>
                   </CardContent>
                 </Card>
                 <Card>
-                  <CardContent className="p-4">
-                    <h4 className="font-semibold mb-2">Análisis</h4>
-                    <ul className="space-y-1 text-sm">
-                      <li>• Visualización de Datos</li>
-                      <li>• Modelado Estadístico</li>
-                      <li>• ETL y Procesamiento</li>
-                      <li>• Reportes Automatizados</li>
+                  <CardContent className="p-4 sm:p-6">
+                    <h4 className="font-semibold mb-3 text-base sm:text-lg">Análisis</h4>
+                    <ul className="space-y-2 text-sm sm:text-base">
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Visualización de Datos</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Modelado Estadístico</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>ETL y Procesamiento</span>
+                      </li>
+                      <li className="flex items-start">
+                        <span className="text-primary mr-2 flex-shrink-0">•</span>
+                        <span>Reportes Automatizados</span>
+                      </li>
                     </ul>
                   </CardContent>
                 </Card>
