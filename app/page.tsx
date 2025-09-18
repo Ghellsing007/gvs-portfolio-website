@@ -1,4 +1,5 @@
 import { Header } from "@/components/header"
+import { BusinessCard } from "@/components/business-card"
 import { Hero } from "@/components/hero"
 import { AboutMe } from "@/components/about-me"
 import { Projects } from "@/components/projects"
@@ -12,6 +13,7 @@ export default function Home() {
     <div className="min-h-screen bg-background">
       <Header />
       <main className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <BusinessCard />
         <Hero />
         <AboutMe />
         <Projects />
