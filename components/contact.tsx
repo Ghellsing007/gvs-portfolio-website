@@ -9,16 +9,20 @@ import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, Send, MessageSquare } from "lucide-react";
-import emailjs from "@emailjs/browser"; // Importar EmailJS
+import { useLanguage } from "@/components/language-provider";
+import { portfolioConfig } from "@/config/portfolio";
 
 export function Contact() {
   const { toast } = useToast();
+  const { language } = useLanguage();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
     message: "",
   });
+
+  const { title, subtitle, form, infoTitle, followTitle, availability } = portfolioConfig[language].contact;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -46,23 +50,44 @@ export function Contact() {
     }
   
     try {
-      await emailjs.send(serviceId, templateId, formData, publicKey);
+      const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: formData.name,
+            from_email: formData.email,
+            message: formData.message,
+          },
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error("EmailJS request failed");
+      }
+
       toast({
-        title: "Mensaje enviado",
-        description: "Gracias por contactarme. Te responderé pronto.",
+        title: form.successTitle,
+        description: form.successDesc,
       });
       setFormData({ name: "", email: "", message: "" });
     } catch (error) {
       console.error("❌ Error al enviar el mensaje:", error);
       toast({
-        title: "Error",
-        description: "No se pudo enviar el mensaje. Inténtalo de nuevo.",
+        title: form.errorTitle,
+        description: form.errorDesc,
         variant: "destructive",
       });
     } finally {
       setIsSubmitting(false);
     }
   };
+
   const socialLinks = [
     {
       name: "GitHub",
@@ -91,7 +116,7 @@ export function Contact() {
   ];
 
   return (
-    <section id="contact" className="py-20 bg-background">
+    <section id="contact" className="py-16 bg-background">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -100,10 +125,10 @@ export function Contact() {
           transition={{ duration: 0.5 }}
           className="text-center mb-16"
         >
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Contacto</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
           <div className="h-1 w-20 bg-primary mx-auto"></div>
           <p className="mt-4 text-foreground/80 max-w-2xl mx-auto">
-            ¿Tienes un proyecto en mente o quieres hablar sobre oportunidades de colaboración? ¡Contáctame!
+            {subtitle}
           </p>
         </motion.div>
 
@@ -116,24 +141,24 @@ export function Contact() {
           >
             <Card>
               <CardContent className="p-6">
-                <h3 className="text-xl font-bold mb-6">Envíame un mensaje</h3>
+                <h3 className="text-xl font-bold mb-6">{form.submit}</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="name" className="block text-sm font-medium mb-1">
-                      Nombre
+                      {form.name}
                     </label>
                     <Input
                       id="name"
                       name="name"
                       value={formData.name}
                       onChange={handleChange}
-                      placeholder="Tu nombre"
+                      placeholder={form.namePlaceholder}
                       required
                     />
                   </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium mb-1">
-                      Email
+                      {form.email}
                     </label>
                     <Input
                       id="email"
@@ -141,30 +166,30 @@ export function Contact() {
                       type="email"
                       value={formData.email}
                       onChange={handleChange}
-                      placeholder="tu.email@ejemplo.com"
+                      placeholder={form.emailPlaceholder}
                       required
                     />
                   </div>
                   <div>
                     <label htmlFor="message" className="block text-sm font-medium mb-1">
-                      Mensaje
+                      {form.message}
                     </label>
                     <Textarea
                       id="message"
                       name="message"
                       value={formData.message}
                       onChange={handleChange}
-                      placeholder="¿En qué puedo ayudarte?"
+                      placeholder={form.messagePlaceholder}
                       rows={5}
                       required
                     />
                   </div>
                   <Button type="submit" className="w-full" disabled={isSubmitting}>
                     {isSubmitting ? (
-                      "Enviando..."
+                      form.submitting
                     ) : (
                       <>
-                        <Send className="mr-2 h-4 w-4" /> Enviar mensaje
+                        <Send className="mr-2 h-4 w-4" /> {form.submit}
                       </>
                     )}
                   </Button>
@@ -181,7 +206,7 @@ export function Contact() {
           >
             <div className="h-full flex flex-col justify-between">
               <div>
-                <h3 className="text-xl font-bold mb-6">Información de contacto</h3>
+                <h3 className="text-xl font-bold mb-6">{infoTitle}</h3>
                 <div className="space-y-4 mb-8">
                   <p className="flex items-center">
                     <Mail className="h-5 w-5 mr-3 text-primary" />
@@ -198,7 +223,7 @@ export function Contact() {
                 </div>
 
                 <div>
-                  <h3 className="text-xl font-bold mb-4">Sígueme en</h3>
+                  <h3 className="text-xl font-bold mb-4">{followTitle}</h3>
                   <div className="flex space-x-4">
                     {socialLinks.map((link) => (
                       <a
@@ -217,10 +242,9 @@ export function Contact() {
               </div>
 
               <div className="mt-12 p-6 bg-muted rounded-lg">
-                <h4 className="font-semibold mb-2">Disponibilidad</h4>
+                <h4 className="font-semibold mb-2">{availability.title}</h4>
                 <p className="text-foreground/80 text-sm">
-                  Actualmente estoy disponible para proyectos freelance y oportunidades de trabajo a tiempo completo. Mi
-                  horario de respuesta es de todos los días, de 8:00 a 19:00 (GMT-5).
+                  {availability.description}
                 </p>
               </div>
             </div>

@@ -32,7 +32,6 @@
   "license": "MIT",
   "description": "Portafolio profesional de Garving V. Santana, desarrollador fullstack junior y analista de datos junior. Muestra habilidades técnicas, proyectos destacados, certificaciones y permite contacto directo con CV descargable y diseño responsive moderno.",
   "dependencies": {
-    "@emailjs/browser": "^4.4.1",
     "@emotion/is-prop-valid": "latest",
     "@hookform/resolvers": "^3.9.1",
     "@radix-ui/react-accordion": "^1.2.2",

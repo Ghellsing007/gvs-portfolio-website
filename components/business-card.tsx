@@ -4,58 +4,15 @@ import { useState, type ComponentType, type KeyboardEvent, type SVGProps } from 
 import Image from "next/image"
 import { cn } from "@/lib/utils"
 import { Github, Globe, Linkedin, Mail, MapPin, Phone } from "lucide-react"
-
-interface PersonalInfo {
-  name: string
-  title: string
-  company: string
-  location: string
-  phone: string
-  email: string
-  website: string
-  skills: string[]
-  tagline: string
-  summary: string
-  social: Array<{
-    name: string
-    url: string
-    icon: ComponentType<SVGProps<SVGSVGElement>>
-  }>
-}
-
-const personalInfo: PersonalInfo = {
-  name: "Garving Vásquez Severino",
-  title: "Desarrollador Fullstack & Analista de Datos",
-  company: "Freelance Developer",
-  location: "República Dominicana",
-  phone: "+1 829 872 5551",
-  email: "garving.vasquez@gmail.com",
-  website: "https://gvsportafolio.netlify.app",
-  skills: ["React", "Next.js", "Node.js", "Python", "Power BI", "SQL"],
-  tagline: "Transformo ideas en aplicaciones reales.",
-  summary:
-    "Combino desarrollo fullstack y análisis de datos para crear soluciones digitales escalables y orientadas a resultados.",
-  social: [
-    {
-      name: "GitHub",
-      url: "https://github.com/Ghellsing007",
-      icon: Github,
-    },
-    {
-      name: "LinkedIn",
-      url: "https://www.linkedin.com/in/garving-vasquez-severino-118a98343",
-      icon: Linkedin,
-    },
-    {
-      name: "Portafolio",
-      url: "https://gvsportafolio.netlify.app/",
-      icon: Globe,
-    },
-  ],
-}
+import { portfolioConfig } from "@/config/portfolio";
+import { useLanguage } from "@/components/language-provider"
 
 export function BusinessCard() {
   const [isFlipped, setIsFlipped] = useState(false)
+  const { language } = useLanguage()
+  const personalInfo = portfolioConfig.personalInfo;
+  const businessCard = portfolioConfig[language].businessCard;
+  const about = portfolioConfig[language].about;
 
   const toggleFlip = () => setIsFlipped((prev) => !prev)
   const handleKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
@@ -66,14 +23,16 @@ export function BusinessCard() {
   }
 
   return (
-    <section className="relative py-16 sm:py-20 bg-background" aria-labelledby="business-card-heading">
+    <section
+      className="relative pt-24 pb-10 sm:pt-32 sm:pb-14 bg-background"
+      aria-label="Tarjeta interactiva con detalles de Garving Vásquez Severino"
+    >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center mb-12">
-          <h2 id="business-card-heading" className="text-3xl sm:text-4xl font-bold mb-4">
-            Tarjeta de presentación
-          </h2>
+        <div className="mx-auto max-w-3xl text-center mb-8 sm:mb-10">
           <p className="text-base sm:text-lg text-foreground/70">
-            Hecha un vistazo a quién soy, qué hago y cómo podemos colaborar.
+            {language === 'es' 
+              ? "Echa un vistazo a quién soy, qué hago y cómo podemos colaborar."
+              : "Take a look at who I am, what I do, and how we can collaborate."}
           </p>
         </div>
 
@@ -89,24 +48,34 @@ export function BusinessCard() {
         >
           <div
             className={cn(
-              "relative h-[520px] sm:h-[460px] lg:h-[420px] w-full transition-transform duration-700 [transform-style:preserve-3d]",
+              "relative w-full min-h-[640px] sm:h-[500px] lg:h-[420px] transition-transform duration-700 [transform-style:preserve-3d]",
               isFlipped && "[transform:rotateY(180deg)]"
             )}
           >
-            <CardFront personalInfo={personalInfo} />
-            <CardBack personalInfo={personalInfo} />
+            <CardFront personalInfo={personalInfo} businessCard={businessCard} />
+            <CardBack personalInfo={personalInfo} summary={about.summary[0]} language={language} />
           </div>
         </div>
 
-        <p className="mt-6 text-sm text-foreground/60 text-center">Presiona la tarjeta para alternar entre la información frontal y posterior.</p>
-        <p className="mt-6 text-sm text-foreground/60 text-center">desliza para ver mas.</p>
+        <p className="mt-6 text-sm text-foreground/60 text-center">
+          {language === 'es'
+            ? "Presiona la tarjeta para alternar entre la información frontal y posterior."
+            : "Click the card to toggle between front and back info."}
+        </p>
       </div>
     </section>
   )
 }
 
-function CardFront({ personalInfo }: { personalInfo: PersonalInfo }) {
-  const { name, title, company, location, phone, email, website, skills, tagline } = personalInfo
+function CardFront({ 
+  personalInfo, 
+  businessCard 
+}: { 
+  personalInfo: typeof portfolioConfig.personalInfo,
+  businessCard: typeof portfolioConfig.es.businessCard | typeof portfolioConfig.en.businessCard
+}) {
+  const { name, phone, email, website } = personalInfo
+  const { title, company, location, tagline, skills } = businessCard
 
   return (
     <div
@@ -119,48 +88,98 @@ function CardFront({ personalInfo }: { personalInfo: PersonalInfo }) {
       <div className="absolute bottom-0 left-0 right-0 h-28 opacity-25">
         <RetroWave className="h-full w-full text-primary/30" />
       </div>
-      <div className="relative z-10 flex h-full flex-col gap-6 p-6 sm:p-8 lg:flex-row">
-        <div className="lg:w-1/3 flex items-center justify-center">
+      <div className="relative z-10 h-full">
+        <div className="hidden h-full flex-col gap-5 p-5 sm:flex sm:gap-6 sm:p-8 lg:flex-row">
+          <div className="flex items-center justify-center lg:w-1/3">
+            <div className="relative">
+              <div className="absolute -inset-3 rounded-full bg-gradient-to-tr from-primary/30 to-primary/10 blur" />
+              <div className="relative h-32 w-32 xs:h-36 xs:w-36 sm:h-40 sm:w-40 lg:h-44 lg:w-44 overflow-hidden rounded-full border-4 border-background/70 shadow-lg">
+                <Image
+                  src="/hero.jpg"
+                  alt={name}
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 200px, 240px"
+                  priority
+                />
+              </div>
+              <div className="absolute -bottom-4 -right-4 text-primary">
+                <RetroPhone className="h-12 w-12 text-primary/80 dark:text-primary/60" />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex flex-1 flex-col justify-between gap-5 sm:gap-6">
+            <div>
+              <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">{name}</h3>
+              <p className="text-base sm:text-xl text-primary/80 dark:text-primary/60 font-medium">{title}</p>
+              <p className="text-sm sm:text-base text-foreground/70">{company}</p>
+              <p className="mt-3 text-sm sm:text-base text-foreground/70 leading-relaxed">{tagline}</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <InfoItem icon={MapPin} label="Ubicación" value={location} />
+              <InfoItem icon={Phone} label="Teléfono" value={phone} />
+              <InfoItem icon={Mail} label="Correo" value={email} />
+              <InfoItem icon={Globe} label="Web" value={website} isLink />
+            </div>
+
+            <div>
+              <p className="text-xs font-semibold tracking-wide text-primary/70 uppercase mb-2">Stack principal</p>
+              <div className="flex flex-wrap gap-2">
+                {skills.map((skill: string) => (
+                  <span
+                    key={skill}
+                    className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] sm:text-xs font-medium text-foreground/80"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex h-full flex-col items-center gap-4 p-5 text-center sm:hidden">
           <div className="relative">
-            <div className="absolute -inset-3 rounded-full bg-gradient-to-tr from-primary/30 to-primary/10 blur" />
-            <div className="relative h-36 w-36 sm:h-40 sm:w-40 lg:h-44 lg:w-44 overflow-hidden rounded-full border-4 border-background/70 shadow-lg">
+            <div className="absolute -inset-2 rounded-full bg-gradient-to-tr from-primary/30 to-primary/10 blur" />
+            <div className="relative h-28 w-28 overflow-hidden rounded-full border-4 border-background/70 shadow-lg">
               <Image
                 src="/hero.jpg"
                 alt={name}
                 fill
                 className="object-cover"
-                sizes="(max-width: 1024px) 200px, 240px"
+                sizes="120px"
                 priority
               />
             </div>
-            <div className="absolute -bottom-4 -right-4 text-primary">
-              <RetroPhone className="h-12 w-12 text-primary/80 dark:text-primary/60" />
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-1 flex-col justify-between gap-6">
-          <div>
-            <h3 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground mb-2">{name}</h3>
-            <p className="text-lg sm:text-xl text-primary/80 dark:text-primary/60 font-medium">{title}</p>
-            <p className="text-sm sm:text-base text-foreground/70">{company}</p>
-            <p className="mt-4 text-sm sm:text-base text-foreground/70 leading-relaxed">{tagline}</p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <InfoItem icon={MapPin} label="Ubicación" value={location} />
-            <InfoItem icon={Phone} label="Teléfono" value={phone} />
-            <InfoItem icon={Mail} label="Correo" value={email} />
-            <InfoItem icon={Globe} label="Web" value={website} isLink />
+          <div className="flex flex-col items-center gap-1">
+            <h3 className="text-xl font-semibold text-foreground">{name}</h3>
+            <p className="text-sm font-medium text-primary/80 dark:text-primary/60">{title}</p>
+            <p className="text-xs text-foreground/70">{company}</p>
           </div>
 
-          <div>
-            <p className="text-xs font-semibold tracking-wide text-primary/70 uppercase mb-2">Stack principal</p>
-            <div className="flex flex-wrap gap-2">
-              {skills.map((skill) => (
+          <p className="text-sm text-foreground/70 leading-relaxed">
+            {tagline}
+          </p>
+
+          <div className="w-full space-y-3 text-left">
+            <InfoItem icon={MapPin} label="Ubicación" value={location} variant="compact" />
+            <InfoItem icon={Phone} label="Teléfono" value={phone} variant="compact" />
+            <InfoItem icon={Mail} label="Correo" value={email} variant="compact" />
+          </div>
+
+          <div className="w-full">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-primary/70 mb-2">
+              Stack principal
+            </p>
+            <div className="flex flex-wrap justify-center gap-2">
+              {skills.slice(0, 4).map((skill: string) => (
                 <span
                   key={skill}
-                  className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-xs font-medium text-foreground/80"
+                  className="rounded-full border border-primary/20 bg-primary/5 px-3 py-1 text-[11px] font-medium text-foreground/80"
                 >
                   {skill}
                 </span>
@@ -178,8 +197,16 @@ function CardFront({ personalInfo }: { personalInfo: PersonalInfo }) {
   )
 }
 
-function CardBack({ personalInfo }: { personalInfo: PersonalInfo }) {
-  const { summary, social, name } = personalInfo
+function CardBack({ 
+  personalInfo, 
+  summary,
+  language
+}: { 
+  personalInfo: typeof portfolioConfig.personalInfo,
+  summary: string,
+  language: string
+}) {
+  const { social, name } = personalInfo
   const currentYear = new Date().getFullYear()
 
   return (
@@ -197,19 +224,21 @@ function CardBack({ personalInfo }: { personalInfo: PersonalInfo }) {
         <RoseIcon className="h-10 w-10 text-primary/50" />
       </div>
 
-      <div className="relative z-10 flex h-full flex-col items-center justify-center px-6 text-center sm:px-12">
-        <p className="text-sm uppercase tracking-[0.35em] text-primary/70">{name.split(" ")[0]} {currentYear}</p>
-        <h3 className="mt-4 text-2xl sm:text-3xl font-semibold text-foreground">Colaboración y resultados</h3>
-        <p className="mt-4 text-base sm:text-lg text-foreground/70 max-w-xl">{summary}</p>
+      <div className="relative z-10 flex h-full flex-col items-center justify-center px-5 text-center sm:px-12">
+        <p className="text-xs sm:text-sm uppercase tracking-[0.35em] text-primary/70">{name.split(" ")[0]} {currentYear}</p>
+        <h3 className="mt-3 text-xl sm:text-3xl font-semibold text-foreground">
+          {language === 'es' ? "Colaboración y resultados" : "Collaboration and results"}
+        </h3>
+        <p className="mt-4 text-sm sm:text-lg text-foreground/70 max-w-xl">{summary}</p>
 
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
+        <div className="mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
           {social.map((item) => (
             <a
               key={item.name}
               href={item.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-4 py-2 text-sm font-medium text-foreground/80 transition-colors hover:border-primary/50 hover:bg-primary/10"
+              className="flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-3 py-2 text-xs sm:text-sm font-medium text-foreground/80 transition-colors hover:border-primary/50 hover:bg-primary/10"
             >
               <item.icon className="h-4 w-4" />
               {item.name}
@@ -217,7 +246,9 @@ function CardBack({ personalInfo }: { personalInfo: PersonalInfo }) {
           ))}
         </div>
 
-        <p className="mt-10 text-xs text-foreground/50 tracking-[0.3em]">Haz clic para regresar</p>
+        <p className="mt-8 sm:mt-10 text-[11px] sm:text-xs text-foreground/50 tracking-[0.3em]">
+          {language === 'es' ? "Haz clic para regresar" : "Click to flip back"}
+        </p>
       </div>
 
       <div className="absolute inset-x-0 top-0 h-[3px] bg-gradient-to-r from-primary/30 via-primary/50 to-primary/30" />
@@ -233,11 +264,13 @@ function InfoItem({
   label,
   value,
   isLink = false,
+  variant = "default",
 }: {
   icon: ComponentType<SVGProps<SVGSVGElement>>
   label: string
   value: string
   isLink?: boolean
+  variant?: "default" | "compact"
 }) {
   const content = isLink ? (
     <a href={value} target="_blank" rel="noopener noreferrer" className="hover:text-primary transition-colors">
@@ -248,11 +281,23 @@ function InfoItem({
   )
 
   return (
-    <div className="flex items-start gap-3 rounded-xl border border-primary/15 bg-primary/5 px-3 py-3 text-sm text-foreground/80">
-      <Icon className="mt-0.5 h-4 w-4 text-primary/70" />
+    <div
+      className={cn(
+        "flex items-start gap-3 rounded-xl border border-primary/15 bg-primary/5 text-foreground/80",
+        variant === "compact" ? "px-3 py-2 text-sm" : "px-3 py-2.5 sm:py-3 text-sm"
+      )}
+    >
+      <Icon className={cn("h-4 w-4 flex-shrink-0 text-primary/70", variant === "compact" ? "mt-0" : "mt-0.5")} />
       <div>
-        <p className="text-xs uppercase tracking-wide text-primary/60">{label}</p>
-        <p className="text-sm break-words">{content}</p>
+        <p
+          className={cn(
+            "uppercase tracking-wide text-primary/60",
+            variant === "compact" ? "text-[10px]" : "text-xs"
+          )}
+        >
+          {label}
+        </p>
+        <p className={cn("break-words", variant === "compact" ? "text-[13px]" : "text-sm")}>{content}</p>
       </div>
     </div>
   )

@@ -6,12 +6,17 @@ import { useTheme } from "next-themes"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu, X } from "lucide-react"
 import { motion, AnimatePresence } from "framer-motion"
+import { useLanguage } from "@/components/language-provider"
+import { portfolioConfig } from "@/config/portfolio"
 
 export function Header() {
   const { theme, setTheme } = useTheme()
+  const { language, setLanguage } = useLanguage()
   const [isScrolled, setIsScrolled] = useState(false)
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [mounted, setMounted] = useState(false)
+
+  const navLinks = portfolioConfig[language].nav
 
   useEffect(() => {
     setMounted(true)
@@ -31,15 +36,6 @@ export function Header() {
     }
   }, [mobileMenuOpen])
 
-  const navLinks = [
-    { name: "Home", href: "#home" },
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Certifications", href: "#certifications" },
-    { name: "Resume", href: "#resume" },
-    { name: "Contact", href: "#contact" },
-  ]
-
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -58,28 +54,50 @@ export function Header() {
             </Link>
           ))}
           {mounted && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                aria-label="Toggle language"
+                className="mr-2"
+              >
+                <span className="font-bold text-sm">{language === "es" ? "EN" : "ES"}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                aria-label="Toggle theme"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+            </>
           )}
         </nav>
 
         <div className="flex items-center md:hidden space-x-2">
           {mounted && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              aria-label="Toggle theme"
-              className="min-h-[44px] min-w-[44px]"
-            >
-              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </Button>
+            <>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setLanguage(language === "es" ? "en" : "es")}
+                aria-label="Toggle language"
+                className="min-h-[44px] min-w-[44px]"
+              >
+                <span className="font-bold text-sm">{language === "es" ? "EN" : "ES"}</span>
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+                aria-label="Toggle theme"
+                className="min-h-[44px] min-w-[44px]"
+              >
+                {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+              </Button>
+            </>
           )}
           <Button
             variant="ghost"
