@@ -114,6 +114,17 @@ export const portfolioConfig = {
       items: [
         {
           id: 1,
+          title: "administrard  ",
+          description: "Plataforma para la gestión y administración de negocios. Permite gestionar y administrar los datos de los clientes, los productos y los pedidos.",
+          image: "/administrard.png",
+          tags: ["React", "Next.js", "Tailwind CSS", "API"],
+          category: "web",
+          github: "#",
+          demo: "https://administrard.gvslabs.cloud/",
+          featured: false,
+        },
+         {
+          id: 2,
           title: "Orpheus",
           description: "Plataforma para compartir escuchar y reproducir musica.",
           image: "/orpheus.png",
@@ -124,7 +135,7 @@ export const portfolioConfig = {
           featured: true,
         },
         {
-          id: 2,
+          id: 3,
           title: "Rendrly",
           description: "Plataforma para rentar y administrar vehículos.",
           image: "/rendrly.png",
@@ -135,7 +146,7 @@ export const portfolioConfig = {
           featured: false,
         },
         {
-          id: 3,
+          id: 4,
           title: "GVSAnime",
           description: "Web de anime con API de Jikan y diseño moderno.",
           image: "/GVSanime.png",
@@ -146,7 +157,7 @@ export const portfolioConfig = {
           featured: false,
         },
         {
-          id: 4,
+          id: 5,
           title: "Luna Hair & Beauty",
           description: "Page para Luna Hair & Beauty, un salón especializado en coloración y cuidado profesional del cabello en Santo Domingo. El diseño es moderno y atractivo, destacando un fondo de imagen en alta calidad que muestra un servicio de lavado de cabello, lo que transmite profesionalismo y confort.",
           image: "/luna-hair.png",
@@ -157,7 +168,7 @@ export const portfolioConfig = {
           featured: false,
         },
         {
-          id: 5,
+          id: 6,
           title: "Agendly-Saas",
           description: "Plataforma de agendas online para optimizar la atención al cliente y administrar horarios de forma eficiente.",
           image: "/agendly-saas.webp",
@@ -165,17 +176,6 @@ export const portfolioConfig = {
           category: "web",
           github: "#",
           demo: "https://agendly-saas.netlify.app/",
-          featured: false,
-        },
-        {
-          id: 6,
-          title: "administrard  ",
-          description: "Plataforma para la gestión y administración de negocios. Permite gestionar y administrar los datos de los clientes, los productos y los pedidos.",
-          image: "/administrard.png",
-          tags: ["React", "Next.js", "Tailwind CSS", "API"],
-          category: "web",
-          github: "#",
-          demo: "https://administrard.gvslabs.cloud/",
           featured: false,
         },
          {
