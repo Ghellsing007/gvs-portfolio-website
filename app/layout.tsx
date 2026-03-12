@@ -113,7 +113,7 @@ export default function RootLayout({
 
       <body className={inter.className}>
         <StructuredData />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
             {children}
             <Analytics />
