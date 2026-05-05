@@ -9,8 +9,24 @@ import { motion } from "framer-motion"
 
 export function Resume() {
   const { language } = useLanguage()
-  const { title, downloadCv, experienceTitle, educationTitle, experience, education, keySkills, keySkillsTitle } = portfolioConfig[language].resume;
-  const cvFile = portfolioConfig[language].cvFile;
+  const { data, loading } = useCMS();
+
+  // Fallbacks estáticos
+  const staticConfig = portfolioConfig[language].resume;
+  const staticCvFile = portfolioConfig[language].cvFile;
+
+  // Datos dinámicos del CMS
+  const dynamicResume = data?.[language]?.resume;
+  const dynamicCvFile = data?.[language]?.cvFile;
+
+  const experience = dynamicResume?.experience || staticConfig.experience;
+  const education = dynamicResume?.education || staticConfig.education;
+  const keySkills = dynamicResume?.keySkills || staticConfig.keySkills;
+  const cvFile = dynamicCvFile || staticCvFile;
+
+  const { title, downloadCv, experienceTitle, educationTitle, keySkillsTitle } = staticConfig;
+
+  if (loading && !data) return null;
 
   return (
     <section id="resume" className="py-12 sm:py-16">
@@ -54,7 +70,7 @@ export function Resume() {
               <h3 className="text-xl sm:text-2xl font-bold">{experienceTitle}</h3>
             </div>
             <div className="space-y-6 sm:space-y-8">
-              {experience.map((job, index) => (
+              {experience.map((job: any, index: number) => (
                 <div key={index} className="relative pl-8 border-l-2 border-primary/20 last:border-0">
                   <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-primary" />
                   <div className="mb-1">
@@ -64,7 +80,7 @@ export function Resume() {
                   <span className="text-sm text-muted-foreground block mb-3">{job.period}</span>
                   <p className="text-foreground/80 leading-relaxed">{job.description}</p>
                   <div className="flex flex-wrap gap-2 mt-3">
-                    {job.skills.map((skill) => (
+                    {job.skills?.map((skill: string) => (
                       <Badge key={skill} variant="secondary" className="text-xs">
                         {skill}
                       </Badge>
@@ -88,7 +104,7 @@ export function Resume() {
               <h3 className="text-xl sm:text-2xl font-bold">{educationTitle}</h3>
             </div>
             <div className="space-y-6 sm:space-y-8">
-              {education.map((edu, index) => (
+              {education.map((edu: any, index: number) => (
                 <div key={index} className="relative pl-8 border-l-2 border-primary/20 last:border-0">
                   <div className="absolute -left-[9px] top-0 h-4 w-4 rounded-full bg-primary" />
                   <div className="mb-1">
@@ -107,11 +123,11 @@ export function Resume() {
                    {keySkillsTitle}
                  </h3>
                  <div className="space-y-4">
-                   {keySkills.map((category) => (
+                   {keySkills.map((category: any) => (
                      <div key={category.title}>
                        <h4 className="font-semibold mb-2">{category.title}</h4>
                        <div className="flex flex-wrap gap-2">
-                         {category.items.map((skill) => (
+                         {category.items.map((skill: string) => (
                            <Badge key={skill} variant="outline" className="text-sm py-1 px-3">
                              {skill}
                            </Badge>

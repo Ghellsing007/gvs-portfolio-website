@@ -4,11 +4,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Calendar, Award } from "lucide-react"
 import { portfolioConfig } from "@/config/portfolio";
 import { useLanguage } from "@/components/language-provider"
+import { useCMS } from "@/components/cms-provider"
 import { motion } from "framer-motion"
 
 export function Certifications() {
   const { language } = useLanguage()
-  const { items: certifications, title, subtitle } = portfolioConfig[language].certifications;
+  const { data } = useCMS()
+
+  const currentConfig = data?.[language] || portfolioConfig[language]
+  const { items: certifications, title, subtitle } = currentConfig.certifications;
 
   return (
     <section id="certifications" className="py-12 sm:py-16 bg-background/50">
@@ -51,7 +55,7 @@ export function Certifications() {
                     <Award className="h-6 w-6 text-primary flex-shrink-0" />
                   </div>
                   <CardDescription className="text-base font-medium text-foreground/80">
-                    {cert.platform}
+                    {(cert as any).platform || (cert as any).issuer}
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

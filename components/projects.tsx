@@ -7,11 +7,15 @@ import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
 import { portfolioConfig } from "@/config/portfolio";
 import { useLanguage } from "@/components/language-provider"
+import { useCMS } from "@/components/cms-provider"
 import { motion } from "framer-motion"
 
 export function Projects() {
   const { language } = useLanguage()
-  const { items: projects, title, subtitle, featuredTitle, viewProject, demo } = portfolioConfig[language].projects;
+  const { data } = useCMS()
+
+  const currentConfig = data?.[language] || portfolioConfig[language]
+  const { items: projects, title, subtitle, featuredTitle, demo } = currentConfig.projects;
 
   return (
     <section id="projects" className="py-12 sm:py-16">

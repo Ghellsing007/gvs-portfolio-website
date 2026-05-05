@@ -6,6 +6,7 @@ import { ThemeProvider } from "@/components/theme-provider"
 import { Analytics } from "@/components/analytics"
 import { StructuredData } from "@/components/structured-data"
 import { LanguageProvider } from "@/components/language-provider"
+import { CMSProvider } from "@/components/cms-provider"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -115,8 +116,10 @@ export default function RootLayout({
         <StructuredData />
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
           <LanguageProvider>
-            {children}
-            <Analytics />
+            <CMSProvider>
+              {children}
+              <Analytics />
+            </CMSProvider>
           </LanguageProvider>
         </ThemeProvider>
       </body>

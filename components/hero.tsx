@@ -5,11 +5,16 @@ import { ArrowRight } from "lucide-react"
 import Link from "next/link"
 import { portfolioConfig } from "@/config/portfolio"
 import { useLanguage } from "@/components/language-provider"
+import { useCMS } from "@/components/cms-provider"
 import { motion } from "framer-motion"
 
 export function Hero() {
   const { language } = useLanguage()
-  const { headline, subheadline, cta } = portfolioConfig[language].hero
+  const { data } = useCMS()
+  
+  // Usamos data dinámica si existe, si no fallback al config estático
+  const currentConfig = data?.[language] || portfolioConfig[language]
+  const { headline, subheadline, cta } = currentConfig.hero
 
   return (
     <section id="home" className="pt-20 pb-16 md:pt-32 md:pb-24 overflow-hidden">

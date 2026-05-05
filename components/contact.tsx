@@ -15,6 +15,7 @@ import { portfolioConfig } from "@/config/portfolio";
 export function Contact() {
   const { toast } = useToast();
   const { language } = useLanguage();
+  const { data } = useCMS();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
@@ -22,7 +23,10 @@ export function Contact() {
     message: "",
   });
 
-  const { title, subtitle, form, infoTitle, followTitle, availability } = portfolioConfig[language].contact;
+  const staticContact = portfolioConfig[language].contact;
+  const profile = data?.personalInfo;
+
+  const { title, subtitle, form, infoTitle, followTitle, availability } = staticContact;
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -92,28 +96,31 @@ export function Contact() {
     {
       name: "GitHub",
       icon: Github,
-      url: "https://github.com/Ghellsing007",
+      url: profile?.social?.find((s: any) => s.name === "GitHub")?.url || "https://github.com/Ghellsing007",
       color: "hover:text-gray-800 dark:hover:text-gray-200",
     },
     {
       name: "LinkedIn",
       icon: Linkedin,
-      url: "https://www.linkedin.com/in/garving-vasquez-severino-118a98343",
+      url: profile?.social?.find((s: any) => s.name === "LinkedIn")?.url || "https://www.linkedin.com/in/garving-vasquez-severino-118a98343",
       color: "hover:text-blue-700",
     },
     {
       name: "Email",
       icon: Mail,
-      url: "mailto:garving.vasquez@gmail.com",
+      url: `mailto:${profile?.email || "garving.vasquez@gmail.com"}`,
       color: "hover:text-red-500",
     },
     {
       name: "WhatsApp",
       icon: MessageSquare,
-      url: "https://wa.me/+18298725551",
+      url: profile?.phone ? `https://wa.me/${profile.phone.replace(/\D/g, "")}` : "https://wa.me/+18298725551",
       color: "hover:text-green-600",
     },
   ];
+
+  const email = profile?.email || "garving.vasquez@gmail.com";
+  const phone = profile?.phone || "+1 829 872 5551";
 
   return (
     <section id="contact" className="py-16 bg-background">
@@ -210,14 +217,14 @@ export function Contact() {
                 <div className="space-y-4 mb-8">
                   <p className="flex items-center">
                     <Mail className="h-5 w-5 mr-3 text-primary" />
-                    <a href="mailto:garving.vasquez@gmail.com" className="hover:text-primary transition-colors">
-                      garving.vasquez@gmail.com
+                    <a href={`mailto:${email}`} className="hover:text-primary transition-colors">
+                      {email}
                     </a>
                   </p>
                   <p className="flex items-center">
                     <MessageSquare className="h-5 w-5 mr-3 text-primary" />
-                    <a href="https://wa.me/+18298725551" className="hover:text-primary transition-colors">
-                      +1 829 872 5551
+                    <a href={`https://wa.me/${phone.replace(/\D/g, "")}`} className="hover:text-primary transition-colors">
+                      {phone}
                     </a>
                   </p>
                 </div>

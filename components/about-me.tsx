@@ -4,11 +4,15 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { portfolioConfig } from "@/config/portfolio";
 import { useLanguage } from "@/components/language-provider"
+import { useCMS } from "@/components/cms-provider"
 import { motion } from "framer-motion"
 
 export function AboutMe() {
   const { language } = useLanguage()
-  const { skills, languages, summary, title, skillsTitle, languagesTitle } = portfolioConfig[language].about;
+  const { data } = useCMS()
+
+  const currentConfig = data?.[language] || portfolioConfig[language]
+  const { skills, languages, summary, title, skillsTitle, languagesTitle } = currentConfig.about;
 
   return (
     <section id="about" className="py-12 sm:py-16 bg-background/50">
