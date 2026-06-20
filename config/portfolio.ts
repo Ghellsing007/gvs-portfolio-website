@@ -153,7 +153,7 @@ export const portfolioConfig = {
           tags: ["React", "Next.js", "Tailwind CSS", "API"],
           category: "web",
           github: "#",
-          demo: "https://gvsanime.vercel.app/",
+          demo: "https://gvsanime.gvslabs.cloud/",
           featured: false,
         },
         {
