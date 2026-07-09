@@ -462,11 +462,11 @@ export const portfolioConfig = {
           id: 1,
           title: "Orpheus",
           description: "Platform to share, listen, and play music.",
-          image: "/orpheus-music.png",
+          image: "/orpheus.png",
           tags: ["React", "Next.js", "Tailwind CSS", "API"],
           category: "web",
           github: "#",
-          demo: "https://orpheus-music-sand.vercel.app/",
+          demo: "https://orpheus.gvslabs.cloud",
           featured: true,
         },
         {
@@ -488,7 +488,7 @@ export const portfolioConfig = {
           tags: ["React", "Next.js", "Tailwind CSS", "API"],
           category: "web",
           github: "#",
-          demo: "https://gvsanime.vercel.app/",
+          demo: "https://gvsanime.gvslabs.cloud/",
           featured: false,
         },
         {
