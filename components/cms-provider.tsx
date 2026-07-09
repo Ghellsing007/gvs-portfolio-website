@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { portfolioApi } from "@/lib/api";
+import { portfolioConfig } from "@/config/portfolio";
 
 const CMSContext = createContext<any>(null);
 
@@ -10,6 +11,12 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    const useCMS = process.env.NEXT_PUBLIC_USE_CMS === "true";
+    if (!useCMS) {
+      setLoading(false);
+      return;
+    }
+
     async function loadData() {
       try {
         const [profile, projects, certifications, experience, skills] = await Promise.all([
@@ -36,10 +43,14 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
           },
           es: {
             cvFile: profile.cvUrl,
-            hero: profile.hero?.es,
+            hero: {
+              ...portfolioConfig.es.hero,
+              headline: profile.hero?.es?.headline || profile.hero?.es || portfolioConfig.es.hero.headline,
+              subheadline: profile.hero?.es?.subheadline || portfolioConfig.es.hero.subheadline,
+            },
             about: {
               title: "Sobre Mí",
-              summary: profile.bio?.es,
+              summary: profile.bio?.es || portfolioConfig.es.about.summary,
               skillsTitle: "Tecnologías y Herramientas",
               skills: skills.map((s: any) => ({ name: s.name, category: s.category })),
               languagesTitle: "Idiomas",
@@ -48,21 +59,35 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
                 { name: "Inglés", level: "Básico" },
               ],
             },
-            projects: projects.map((p: any) => ({
-              title: p.title.es,
-              description: p.description.es,
-              image: p.image,
-              tags: p.tags,
-              link: p.link,
-              github: p.github,
-            })),
-            certifications: certifications.map((c: any) => ({
-              title: c.title,
-              issuer: c.issuer,
-              date: c.date,
-              link: c.link,
-              image: c.image,
-            })),
+            projects: {
+              ...portfolioConfig.es.projects,
+              items: projects.map((p: any) => {
+                const staticProject = portfolioConfig.es.projects.items.find(
+                  (item: any) => item.title.trim().toLowerCase() === p.title.trim().toLowerCase()
+                );
+                return {
+                  id: p._id || p.id,
+                  title: p.title,
+                  description: p.description?.es || p.description,
+                  image: p.imageUrl || p.image || staticProject?.image || "/placeholder.svg",
+                  tags: p.tags,
+                  demo: p.demoUrl || p.link || "#",
+                  github: p.github || "#",
+                  featured: p.featured || false,
+                  category: p.category || "web",
+                };
+              }),
+            },
+            certifications: {
+              ...portfolioConfig.es.certifications,
+              items: certifications.map((c: any) => ({
+                title: c.title,
+                platform: c.platform || c.issuer,
+                date: c.date,
+                url: c.credentialUrl || c.link || c.url || "#",
+                category: c.category || "other",
+              })),
+            },
             resume: {
               experience: experience.filter((e: any) => e.type === "experience").map((e: any) => ({
                 company: e.company,
@@ -85,10 +110,14 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
           },
           en: {
             cvFile: profile.cvUrl,
-            hero: profile.hero?.en || profile.hero?.es,
+            hero: {
+              ...portfolioConfig.en.hero,
+              headline: profile.hero?.en?.headline || profile.hero?.en || portfolioConfig.en.hero.headline,
+              subheadline: profile.hero?.en?.subheadline || portfolioConfig.en.hero.subheadline,
+            },
             about: {
               title: "About Me",
-              summary: profile.bio?.en || profile.bio?.es,
+              summary: profile.bio?.en || portfolioConfig.en.about.summary,
               skillsTitle: "Technologies & Tools",
               skills: skills.map((s: any) => ({ name: s.name, category: s.category })),
               languagesTitle: "Languages",
@@ -97,21 +126,35 @@ export function CMSProvider({ children }: { children: React.ReactNode }) {
                 { name: "English", level: "Basic" },
               ],
             },
-            projects: projects.map((p: any) => ({
-              title: p.title.en || p.title.es,
-              description: p.description.en || p.description.es,
-              image: p.image,
-              tags: p.tags,
-              link: p.link,
-              github: p.github,
-            })),
-            certifications: certifications.map((c: any) => ({
-              title: c.title,
-              issuer: c.issuer,
-              date: c.date,
-              link: c.link,
-              image: c.image,
-            })),
+            projects: {
+              ...portfolioConfig.en.projects,
+              items: projects.map((p: any) => {
+                const staticProject = portfolioConfig.en.projects.items.find(
+                  (item: any) => item.title.trim().toLowerCase() === p.title.trim().toLowerCase()
+                );
+                return {
+                  id: p._id || p.id,
+                  title: p.title,
+                  description: p.description?.en || p.description?.es || p.description,
+                  image: p.imageUrl || p.image || staticProject?.image || "/placeholder.svg",
+                  tags: p.tags,
+                  demo: p.demoUrl || p.link || "#",
+                  github: p.github || "#",
+                  featured: p.featured || false,
+                  category: p.category || "web",
+                };
+              }),
+            },
+            certifications: {
+              ...portfolioConfig.en.certifications,
+              items: certifications.map((c: any) => ({
+                title: c.title,
+                platform: c.platform || c.issuer,
+                date: c.date,
+                url: c.credentialUrl || c.link || c.url || "#",
+                category: c.category || "other",
+              })),
+            },
             resume: {
               experience: experience.filter((e: any) => e.type === "experience").map((e: any) => ({
                 company: e.company,

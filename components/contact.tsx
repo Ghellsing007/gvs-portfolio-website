@@ -25,7 +25,7 @@ export function Contact() {
   });
 
   const staticContact = portfolioConfig[language].contact;
-  const profile = data?.personalInfo;
+  const profile = data?.personalInfo || portfolioConfig.personalInfo;
 
   const { title, subtitle, form, infoTitle, followTitle, availability } = staticContact;
 
