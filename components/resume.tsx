@@ -6,6 +6,7 @@ import { Download, Briefcase, GraduationCap } from "lucide-react"
 import { portfolioConfig } from "@/config/portfolio";
 import { useLanguage } from "@/components/language-provider"
 import { motion } from "framer-motion"
+import { useCMS } from "@/components/cms-provider"
 
 export function Resume() {
   const { language } = useLanguage()

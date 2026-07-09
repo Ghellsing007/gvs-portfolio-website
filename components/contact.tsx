@@ -11,6 +11,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Github, Linkedin, Mail, Send, MessageSquare } from "lucide-react";
 import { useLanguage } from "@/components/language-provider";
 import { portfolioConfig } from "@/config/portfolio";
+import { useCMS } from "@/components/cms-provider";
 
 export function Contact() {
   const { toast } = useToast();
